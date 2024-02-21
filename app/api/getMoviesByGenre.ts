@@ -5,12 +5,12 @@ export type Genres = {
   limit?: number
 }
 
-export async function getGenres(props: Genres) {
+export async function getMoviesByGenres(props: Genres) {
   const { accessToken } = await getServerSession()
 
   const searchParams = new URLSearchParams(Object.entries(JSON.stringify(props))).toString()
 
-  const res = await fetch(`${process.env.API_URL}/movies/genres/${props.id}?${searchParams}`, {
+  const res = await fetch(`${process.env.API_URL}/genres/movies?${searchParams}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -21,8 +21,6 @@ export async function getGenres(props: Genres) {
   if (!res.ok) throw new Error('Failed to fetch movie genres')
 
   const genres = await res.json()
-
-  console.log({ genres })
 
   return genres.data
 }

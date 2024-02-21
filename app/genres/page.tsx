@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { getGenres, Genres } from '@/app/api/getGenres'
+import { getMoviesByGenres } from '../api/getMoviesByGenre'
+import { useState } from 'react'
 
 export const metadata: Metadata = {
   title: 'Page title',
@@ -7,9 +8,23 @@ export const metadata: Metadata = {
 }
 
 export default async function Page({ searchParams }: { searchParams: Genres }) {
-  const genres = await getGenres({ ...searchParams })
+  const genres = await getMoviesByGenres({ ...searchParams })
 
   console.log({ genres })
 
-  return <div>{JSON.stringify(genres)}</div>
+  return (
+    <div>
+      <h1>Genres</h1>
+
+      <div>
+        {genres.map(({ id, title, movies }) => (
+          <a key={id} href={`/movies/genres/${id}`} className='underline hover:no-underline'>
+            {title}
+          </a>
+        ))}
+      </div>
+
+      {/* <pre>{JSON.stringify(genres, null, 2)}</pre> */}
+    </div>
+  )
 }

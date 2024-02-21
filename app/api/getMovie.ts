@@ -1,8 +1,5 @@
 import { getServerSession } from '@/app/api/getServerSession'
-
-export type Movie = {
-  id?: string
-}
+import type { Movie } from '@/app/types'
 
 export async function getMovie(props: Movie) {
   const { accessToken } = await getServerSession()

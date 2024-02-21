@@ -1,21 +1,28 @@
 import { getServerSession } from '@/app/api/getServerSession'
-
-export type Movies = {
-  page?: number
-  limit?: number
-  search?: string
-  genre?: string
-}
+import { Movies } from '@/app/types'
 
 export async function getMovies(props: Movies) {
   const { accessToken } = await getServerSession()
+  const page = parseInt(props.page) || 1
 
   const searchParams = new URLSearchParams(
     // Props aren't all strings, so we need to convert them to strings
     Object.entries(props).map(([key, value]) => [key, String(value)])
   ).toString()
 
+  console.log({ searchParams })
+
+  // Standard movies API
   const res = await fetch(`${process.env.API_URL}/movies?${searchParams}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  })
+
+  // We fetch the movietitles instead of the main movies API as it's more efficient, as we're fetching all the records - we could remove this if we were given a count
+  const titlesRes = await fetch(`${process.env.API_URL}/movies/titles?limit=1000`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -26,6 +33,21 @@ export async function getMovies(props: Movies) {
   if (!res.ok) throw new Error('Failed to fetch movies')
 
   const movies = await res.json()
+  const movieTitles = await titlesRes.json()
 
-  return movies.data
+  console.log(movieTitles)
+
+  return {
+    movies: movies.data,
+    pagination: {
+      total: movieTitles.data.length,
+      prevUrl: page > 1 ? (page !== 2 ? `?page=${page - 1}` : ``) : null,
+      nextUrl:
+        movieTitles.data.length > movies.data.length
+          ? page < movieTitles.data.length
+            ? `?page=${page + 1}`
+            : `?page=2`
+          : null,
+    },
+  }
 }

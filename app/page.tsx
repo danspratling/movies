@@ -24,6 +24,7 @@ export default async function Page({ searchParams }: { searchParams: { [x: strin
       <div className='flex gap-2 overflow-auto py-4'>
         {genres.map(genre => (
           <a
+            key={genre.id}
             href={selectedGenre?.title !== genre.title ? `/?genre=${genre.title}` : '/'}
             className={`block p-2 text-nowrap border border-white hover:bg-white hover:text-black ${
               selectedGenre?.title === genre.title ? 'bg-white text-black' : ''
@@ -35,7 +36,7 @@ export default async function Page({ searchParams }: { searchParams: { [x: strin
       </div>
       <div className='flex gap-8 flex-wrap justify-center'>
         {movies.map(({ id, title, posterUrl }) => (
-          <Link href={`/movies/${id}`} key={id} className='max-w-64 group'>
+          <Link key={id} href={`/movies/${id}`} className='max-w-64 group'>
             <h2>{title}</h2>
             <Image
               src={posterUrl}

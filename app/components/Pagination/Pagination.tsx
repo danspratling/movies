@@ -1,5 +1,3 @@
-'use client'
-
 import { type PaginationProps } from '@/app/types'
 import Link from 'next/link'
 

@@ -1,11 +1,6 @@
 import { getServerSession } from '@/app/api/getServerSession'
 
-export type Genres = {
-  page?: number
-  limit?: number
-}
-
-export async function getGenres(props: Genres) {
+export async function getGenres(props: any) {
   const { accessToken } = await getServerSession()
 
   const searchParams = new URLSearchParams(Object.entries(JSON.stringify(props))).toString()

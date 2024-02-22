@@ -1,10 +1,9 @@
 import { getServerSession } from '@/app/api/getServerSession'
-import { Movies } from '@/app/types'
+import { MoviesProps } from '@/app/types'
 
-export async function getMovies(props: Movies) {
+export async function getMovies(props: any) {
   const { accessToken } = await getServerSession()
   const page = parseInt(props.page) || 1
-  const limit = parseInt(props.limit) || 25
 
   const searchParams = new URLSearchParams(
     // Props aren't all strings, so we need to convert them to strings
@@ -22,7 +21,7 @@ export async function getMovies(props: Movies) {
 
   if (!res.ok) throw new Error('Failed to fetch movies')
 
-  const movies = await res.json()
+  const movies: { data: MoviesProps; totalPages: number } = await res.json()
 
   // Return our movies and create a pagination object so we can navigate through the pages
   return {

@@ -15,7 +15,7 @@ export type MovieProps = {
   genres: GenreProps[]
 }
 
-export type MoviesProps = MovieProps[]
+export type MoviesProps = { page: string } & MovieProps[]
 
 export type GenreProps = {
   id: string

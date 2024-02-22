@@ -14,10 +14,17 @@ export async function getServerSession() {
 
     if (res.status === 401) notFound()
 
-    accessToken = await res.json()
+    const tokenResponse = await res.json()
+
+    accessToken = tokenResponse.token
+
+    if (!accessToken) notFound()
+
+    // Save the token to localstorage
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('next:session', accessToken)
+    }
   }
 
-  if (!accessToken) notFound()
-
-  return { accessToken: accessToken.token }
+  return { accessToken: accessToken }
 }

@@ -1,36 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Highlight something in your project that you thought was especially interesting or significant to your overall implementation.
 
-## Getting Started
+Implementing pagination was an interesting challenge. Typically this was something I would hope to recieve from the API but it's also something that is rarely included. So I implemented it via the getMovies api where I return both the movies response and build a pagination from the data we know - the current page and the total pages for the response. This makes it significantly easier to implement on the frontend and if required, update at a later point.
 
-First, run the development server:
+## Tell us what you are most pleased or proud of with your implementation.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Very little JS is required to run this project, with the only client component being the search form, which falls back to server-side rendering if JS is disabled. It's a personal challenge of mine to only use JS when necessary (to keep code clean and efficient) and I'm always happy to see that I can achieve these things minimally.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Given more time, what next feature or improvement would you like to add to your project?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+With the above point in mind, I think it would be a much nicer UX to allow client-side filtering and searching instead of requiring a page refresh. This creates a more seamless experience for the user. Especially being able to search while typing to automatically filter the results, and show the user feedback as they're searching.

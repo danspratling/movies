@@ -26,8 +26,8 @@ export default async function Page({
     .map(time => parseInt(time))
 
   return (
-    <div className='container flex gap-4'>
-      <div className='prose'>
+    <div className='container flex gap-4 justify-center my-20'>
+      <div className='prose prose-white'>
         <h1 className='text-5xl'>{title}</h1>
         <p className='text-xl'>{summary}</p>
         {/* This is a messy approach to pluralisation but does the job and accounts for 0 hours/minutes */}

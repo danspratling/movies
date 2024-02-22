@@ -17,7 +17,7 @@ export const Pagination = ({ currentPage, totalPages, prevUrl, nextUrl }: Pagina
   )
 }
 
-const PaginationButton = ({ href, children, ...props }: { href: string; children: React.ReactNode }) => {
+const PaginationButton = ({ href, children, ...props }: { href: string | null; children: React.ReactNode }) => {
   if (href !== null) {
     return (
       <Link

@@ -4,6 +4,7 @@ import { getMovies } from '@/app/api/getMovies'
 import type { GenresProps, MoviesProps, PaginationProps } from '@/app/types'
 import Image from 'next/image'
 import { Pagination } from '@/app/components/Pagination'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Page title',
@@ -34,10 +35,16 @@ export default async function Page({ searchParams }: { searchParams: { [x: strin
       </div>
       <div className='flex gap-8 flex-wrap justify-center'>
         {movies.map(({ id, title, posterUrl }) => (
-          <a href={`/movies/${id}`} key={id} className='max-w-64'>
+          <Link href={`/movies/${id}`} key={id} className='max-w-64 group'>
             <h2>{title}</h2>
-            <Image src={posterUrl} alt={title} width={250} height={375} />
-          </a>
+            <Image
+              src={posterUrl}
+              alt={title}
+              width={250}
+              height={375}
+              className='group-hover:opacity-60 duration-200'
+            />
+          </Link>
         ))}
       </div>
 

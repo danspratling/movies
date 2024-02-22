@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 export default async function Page({ searchParams }: { searchParams: Genres }) {
   const genres = await getMoviesByGenres({ ...searchParams })
 
-  console.log({ genres })
-
   return (
     <div>
       <h1>Genres</h1>
@@ -23,8 +21,6 @@ export default async function Page({ searchParams }: { searchParams: Genres }) {
           </a>
         ))}
       </div>
-
-      {/* <pre>{JSON.stringify(genres, null, 2)}</pre> */}
     </div>
   )
 }

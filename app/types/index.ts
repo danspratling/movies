@@ -1,4 +1,4 @@
-export type Movie = {
+export type MovieProps = {
   id: string
   title: string
   posterUrl: string
@@ -12,12 +12,21 @@ export type Movie = {
   bestRating: number
   worstRating: number
   writers: string[]
-  genres: Genre[]
+  genres: GenreProps[]
 }
 
-export type Movies = Movie[]
+export type MoviesProps = MovieProps[]
 
-export type Genre = {
+export type GenreProps = {
   id: string
   title: string
+}
+
+export type GenresProps = GenreProps[]
+
+export type PaginationProps = {
+  currentPage: number
+  totalPages: number
+  prevUrl: string | null
+  nextUrl: string | null
 }

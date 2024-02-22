@@ -22,7 +22,5 @@ export async function getGenres(props: Genres) {
 
   const genres = await res.json()
 
-  console.log({ genres })
-
   return genres.data
 }
